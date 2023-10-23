@@ -1,0 +1,75 @@
+*
+
+    {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+body
+
+    {
+    display: block;
+    padding-top: 55px;
+    background: #001600;
+    color: #118811;
+    font: normal 18px/1.5em monospace;
+    text-align: left;
+    }
+
+    a:link    {color: #33CC33;} /* unvisited link */
+    a:visited {color: #33CC33;} /* visited link */
+    a:hover   {color: #99EE99;} /* mouse over link */
+    a:active  {color: #CCFFCC;} /* selected link */
+
+    h2  {font: normal 1.62em/1.3 monospace;}
+
+nav
+
+    {
+    display: block;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    border: 0;
+    padding: 1.0em 1.62em;
+    line-height: 1.0em;
+    text-align: right;
+    }
+
+article
+
+    {
+    display: block;
+    padding: 1.62em;
+    background: #000A00;
+    text-align: center;
+    }
+
+footer
+
+    {
+    display: block;
+    padding: 1.62em;
+    background: none;
+    text-align: left;
+    }
+
+    footer ul
+
+        {
+        display: block;
+        padding: 0.0em 0.0em 1.0em 0.0em;
+        list-style: none;
+        vertical-align: text-top;
+        }
+
+    footer ul li
+
+        {
+        display: inline-block;
+        }
