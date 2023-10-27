@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=PT+Sans:wght@400;700&display=swap');
+
 *
 
     {
@@ -13,8 +15,8 @@ body
     display: block;
     padding-top: 55px;
     background: #001600;
-    color: #118811;
-    font: normal 18px/1.5em monospace;
+    color: #106610;
+    font: normal 18px/1.5em 'Inconsolata', monospace;
     text-align: left;
     }
 
@@ -23,7 +25,7 @@ body
     a:hover   {color: #99EE99;} /* mouse over link */
     a:active  {color: #CCFFCC;} /* selected link */
 
-    h2  {font: normal 1.62em/1.3 monospace;}
+    h2  {font: normal 3.24em/1.3 'PT Sans', sans-serif;}
 
 nav
 
@@ -41,7 +43,7 @@ nav
     text-align: right;
     }
 
-article
+header
 
     {
     display: block;
@@ -68,8 +70,5 @@ footer
         vertical-align: text-top;
         }
 
-    footer ul li
-
-        {
-        display: inline-block;
-        }
+        footer ul li {display: inline-block; overflow: hidden; background: #000A00;}
+        footer ul li a {display: block; width: 250px; padding: 1.0em;}
