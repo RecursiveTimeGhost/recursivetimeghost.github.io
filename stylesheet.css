@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=PT+Sans:wght@400;700&display=swap');
 
+
 *
 
     {
@@ -10,17 +11,15 @@
     }
 
 
-
 body
 
     {
     display: block;
     background: #DAD7CD;
     color: #588157;
-    font: normal 18px/1.4em 'Inconsolata', monospace;
+    font: normal 22px/1.4em 'Inconsolata', monospace;
     text-align: center;
     }
-
 
 
 a, a:link, a:visited, a:active, a:hover
@@ -34,7 +33,6 @@ a, a:link, a:visited, a:active, a:hover
     a:hover {border-bottom: 2px #A3B18A solid;}
 
 
-
 nav
 
     {
@@ -42,7 +40,6 @@ nav
     padding: 0.67em 1.62em;
     text-align: right;
     }
-
 
 
 header
@@ -57,10 +54,9 @@ header
 
         {
         color: #A3B18A;
-        font: normal 2.7em/1.3em 'PT Sans', sans-serif;
+        font: normal 1.62em/1.3em 'PT Sans', sans-serif;
         text-align: center;
         }
-
 
 
 footer
@@ -68,7 +64,9 @@ footer
     {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-gap: 0.67em;
+    grid-gap: 0.0em;
+    grid-column-gap: 0.67em;
+    grid-row-gap: 1.62em;
     padding: 1.62em;
     }
 
@@ -80,7 +78,7 @@ footer
         }
 
         footer div.label {text-align: right;}
-        footer div.label:after {content:"\00BB";}
+        footer div.label:after {content:"\00BB\0020";}
 
         footer ul li { list-style: none; display: inline-block;}
         footer ul li:after {content:"\0020\203A";}
