@@ -79,12 +79,8 @@ footer
         text-align: left;
         }
 
-        footer div.label
-            {
-            text-align: right;
-            }
-
-            footer div.label:after {content:"\00BB";}
+        footer div.label {text-align: right;}
+        footer div.label:after {content:"\00BB";}
 
         footer ul li { list-style: none; display: inline-block;}
         footer ul li:after {content:"\0020\203A";}
