@@ -7,14 +7,24 @@
     border: 0;
     margin: 0;
     padding: 0;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     }
 
+
+html
+
+    {
+    min-width: 320px;
+    width: 100%;
+    }
 
 body
 
     {
     display: block;
+    width: 100%;
+    height: auto;
     background: #DAD7CD;
     color: #588157;
     font: normal 18px/1.4em 'Inconsolata', monospace;
@@ -23,6 +33,7 @@ body
 
 
 a, a:link, a:visited, a:active, a:hover
+
     {
     color: #588157;
     text-decoration: none;
