@@ -19,6 +19,7 @@ html
     width: 100%;
     }
 
+
 body
 
     {
@@ -49,8 +50,11 @@ nav
     {
     display: block;
     padding: 0.67em 1.62em;
+    color: #92A079;
     text-align: right;
     }
+
+    nav ul li {list-style: none; display: inline-block;}
 
 
 header
@@ -74,25 +78,22 @@ footer
 
     {
     display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-gap: 0.0em;
+    grid-template-columns: 1fr 4fr;
     grid-column-gap: 0.67em;
-    grid-row-gap: 1.62em;
+    grid-row-gap: 0.67em;
     padding: 1.62em;
+    color: #92A079;
+    text-align: left;
     }
 
-    footer div
-        {
-        display: block;
-        color: #A3B18A;
-        text-align: left;
-        }
+    footer div.label {text-align: right;}
+    footer div.label:after {content:"\00BB";}
 
-        footer div.label {text-align: right;}
-        footer div.label:after {content:"\00BB\0020";}
-
-        footer ul li { list-style: none; display: inline-block;}
-        footer ul li:after {content:"\0020\203A";}
-        footer ul li:last-child:after {content:"";}
+    footer ul                      {display:block; padding-bottom:0.67em;}
+    footer ul li                   {list-style: none; display: inline-block;}
+    footer ul li:after             {content:"\0020\2022";}
+    footer ul li:first-child       {display: block;}
+    footer ul li:first-child:after {content:"\0020\203A";}
+    footer ul li:last-child:after  {content:"";}
 
 
