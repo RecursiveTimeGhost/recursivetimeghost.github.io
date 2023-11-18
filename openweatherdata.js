@@ -66,16 +66,18 @@ function convertStateToAbbreviation(state) {
         }
 
 
-function handleWeatherData() {
-    var tagPrompt = document.getElementById("prompt");
-    var tagDataQuery = document.getElementById("dataQuery");
-    var tagResult = document.getElementById("result");
+    function handleWeatherData()
+        {
+        var tagPrompt = document.getElementById("prompt");
+        var tagDataQuery = document.getElementById("dataQuery");
+        var tagResult = document.getElementById("result");
 
-    var inputString = '';
-    var queryString = getWeatherQueryString(inputString);
+        var inputString = '';
+        var queryString = getWeatherQueryString(inputString);
 
-    fetchWeatherData(queryString)
-        .then((queryResults) => {
+        fetchWeatherData(queryString)
+        .then((queryResults) =>
+            {
             console.log(inputString);
             console.log(queryString);
             console.log(queryResults);
@@ -89,13 +91,23 @@ function handleWeatherData() {
             } else {
                 console.error("Spectacular fail! Game over!");
             }
-        })
-        .catch((error) => {
+            })
+        .catch((error) =>
+            {
             console.error("Error handling weather data:", error.message);
-        });
-}
+            });
+        }
 
-window.addEventListener('load', handleWeatherData);
+    function handleOnLoadEvent()
+        {
+        handleWeatherData();
+        }
+
+    // function handleRefreshEvent ()
+    //     {
+    //     }
+
+window.addEventListener('load', handleOnLoadEvent);
 
 /**/
 // console.log("Query:  New ^$#  Boston  , New   Hampshire    | Result: ", getWeatherQueryString("  New ^$#  Boston  , New   Hampshire   "));
