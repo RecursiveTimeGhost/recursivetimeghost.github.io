@@ -7,9 +7,12 @@ const STATE_ABBREVIATIONS = {"Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "
 const API_KEY = '5ba71ce449f4d7fe5a132fd6b5251ed1';
 const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
 
-function convertStateToAbbreviation(state) {
-    return regexState.test(state) ? STATE_ABBREVIATIONS[state] || state : 'MA';
-}
+
+    const convertStateToAbbreviation = (state) =>
+        {
+        return regexState.test(state) ? STATE_ABBREVIATIONS[state] || state : 'MA';
+        }
+
 
     const fetchWeatherData = async (OpenWeatherMapQueryString) =>
         {
@@ -35,6 +38,7 @@ function convertStateToAbbreviation(state) {
             }
         };
 
+
     const getWeatherQueryString = (input = "") =>
         {
         const cleanInput = input.replace(/\s*,\s*/g, ",").replace(/([^\w\s,]*)/g, "").trim().replace(/(\s)+/g," ");
@@ -47,8 +51,6 @@ function convertStateToAbbreviation(state) {
 
                 let zipcode = cleanInput.match(regexZipCode)[0].trim().replace(/\s+/g, ' ');
 
-                console.log("MATCHES(zipcode): ", zipcode);
-
                 query = `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode},us&appid=${API_KEY}&units=imperial&lang=en`;
                 break;
 
@@ -56,9 +58,7 @@ function convertStateToAbbreviation(state) {
 
                 let citystate = cleanInput.match(regexCityState);
 
-                console.log("MATCHES(citystate): ", citystate);
-
-                query = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(citystate[1])},${encodeURIComponent(citystate[2])},us&appid=${API_KEY}&units=imperial&lang=en`;
+                query = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(citystate[1])},${encodeURIComponent(convertStateToAbbreviation(citystate[2]))},us&appid=${API_KEY}&units=imperial&lang=en`;
                 break;
 
             default:
@@ -68,6 +68,28 @@ function convertStateToAbbreviation(state) {
             }
 
         return query;
+        }
+
+
+    const isNightOrDay = (time, sunrise, sunset) =>
+        {
+      // Get the current hour and minute
+        const currentHour = time.getHours();
+        const currentMinute = time.getMinutes();
+
+     // Get sunrise and sunset hours (you need to set these values according to your location)
+        const sunriseHour = sunrise.getHours(); // Example sunrise hour
+        const sunriseMinute = sunrise.getMinutes(); // Example sunrise minute
+        const sunsetHour = sunset.getHours(); // Example sunset hour
+        const sunsetMinute = sunset.getMinutes(); // Example sunset minute
+
+     // Convert sunrise and sunset times to minutes for easier comparison
+        const sunriseTime = sunriseHour * 60 + sunriseMinute;
+        const sunsetTime = sunsetHour * 60 + sunsetMinute;
+        const currentTime = currentHour * 60 + currentMinute;
+
+     // Check if it's night or day
+        return (currentTime >= sunsetTime || currentTime < sunriseTime) ? 'Night' : 'Day';
         }
 
 
@@ -87,11 +109,12 @@ function convertStateToAbbreviation(state) {
             console.log(queryString);
             console.log(data);
 
+            const now = new Date();
             const sunriseTime = new Date(data.sys.sunrise * 1000);
             const sunsetTime = new Date(data.sys.sunset * 1000);
+            const sunMode = isNightOrDay (now, sunriseTime, sunsetTime);
             const weatherIcon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
             const weatherDescription = data.weather[0].description;
-            console.log(weatherDescription);
 
          // Check if the element exists before manipulating it
             if (tagPrompt && tagDataQuery && tagResult)
@@ -101,9 +124,11 @@ function convertStateToAbbreviation(state) {
                 tagDataQuery.innerHTML = "Query: " + queryString;
                 tagResult.innerHTML = "Result: " +
                     '<ul>' +
-                    '<li> Sunrise: ' + sunriseTime.toLocaleTimeString() + '</li>' +
-                    '<li> Sunset: ' + sunsetTime.toLocaleTimeString() + '</li>' +
-                    '<li> Icon: ' + weatherDescription + '<br><img id="weatherIcon" src="'+ weatherIcon + '" alt="Weather Icon">' + '</li>' +
+                    '<li>' + 'Time: ' + now.toLocaleTimeString() + '</li>' +
+                    '<li>' + 'Sunrise: ' + sunriseTime.toLocaleTimeString() + '</li>' +
+                    '<li>' + 'Sunset: ' + sunsetTime.toLocaleTimeString() + '</li>' +
+                    '<li>' + 'SunMode: ' + sunMode + '</li>' +
+                    '<li>' + 'Icon: ' + weatherDescription + '<br><img id="weatherIcon" src="'+ weatherIcon + '" alt="Weather Icon">' + '</li>' +
                     '</ul>';
                 }
             else
@@ -116,6 +141,7 @@ function convertStateToAbbreviation(state) {
             console.error("Error handling weather data:", error.message);
             });
         }
+
 
     function handleOnLoadEvent()
         {
