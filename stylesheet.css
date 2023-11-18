@@ -33,16 +33,20 @@ body
     }
 
 
-a, a:link, a:visited, a:active, a:hover
+a,
+a:link,
+a:visited,
+a:active,
+a:hover
 
     {
+    border-bottom: 2px #B4C29B solid;
     color: #588157;
     text-decoration: none;
     text-transform: lowercase;
-    border-bottom: 2px #DAD7CD solid;
     }
 
-    a:hover {border-bottom: 2px #A3B18A solid;}
+    a:hover {border-bottom: 2px #588157 solid; color: #344E41;}
 
 
 nav

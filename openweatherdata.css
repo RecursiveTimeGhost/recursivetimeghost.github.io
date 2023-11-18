@@ -31,22 +31,27 @@ body
     }
 
 
-a, a:link, a:visited, a:active, a:hover
+a,
+a:link,
+a:visited,
+a:active,
+a:hover
 
     {
     color: #588157;
     text-decoration: none;
     text-transform: lowercase;
-    border-bottom: 2px #DAD7CD solid;
+    border-bottom: 2px #A3B18A solid;
     }
 
-    a:hover {border-bottom: 2px #A3B18A solid;}
+    a:hover {border-bottom: 2px #000000 solid;}
 
-h1, p
+
+h1,
+p
     {
     padding-bottom: 0.67rem
     }
-
 
 #menu
 

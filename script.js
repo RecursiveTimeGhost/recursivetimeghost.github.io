@@ -2,9 +2,12 @@ const TITLE       = 'Recursive Time Ghost';
 const DESCRIPTION = 'A tiny blog for nerds.';
 
 
- // set target attributes to "_blank" for all <a> tags in a given section
-    const setLinkTargetsToBlank = (section = null) =>
+ // Function to set the target attribute of all links to "_blank"
+    const setLinksTargetBlank = () =>
         {
-        const tags = document.querySelectorAll(section ? section + ' a' : 'a');
-        tags.forEach((tag) => {tag.setAttribute('target', '_blank');});
+        document.querySelectorAll('a').forEach(link => {link.target = '_blank';});
         }
+
+ // Call the function when the page has fully loaded
+    window.addEventListener('load', setLinksTargetBlank);
+
