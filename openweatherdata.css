@@ -16,7 +16,6 @@ html
     {
     min-width: 320px;
     width: 100%;
-    font: normal 18px/1.4em 'Inconsolata', monospace;
     }
 
 
@@ -24,10 +23,10 @@ body
 
     {
     display: block;
-    width: auto;
-    height: auto;
+    padding: 0.67rem 1.62rem;
     background: #DAD7CD;
     color: #588157;
+    font: normal 18px/1.4em 'Inconsolata', monospace;
     text-align: left;
     }
 
@@ -43,17 +42,26 @@ a, a:link, a:visited, a:active, a:hover
 
     a:hover {border-bottom: 2px #A3B18A solid;}
 
-h1, p {padding-bottom: 0.67rem}
+h1, p
+    {
+    padding-bottom: 0.67rem
+    }
 
 
 #menu
 
     {
     display: block;
-    padding: 0.67rem 1.62rem;
     color: #92A079;
     text-align: right;
     }
 
     #menu li {list-style: none; display: inline-block;}
 
+#data
+    {
+    display: block;
+    }
+
+    #data li {margin-left: 2.0rem}
+    #data li img {vertical-align: top;}

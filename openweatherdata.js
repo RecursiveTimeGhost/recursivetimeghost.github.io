@@ -21,7 +21,12 @@ function convertStateToAbbreviation(state) {
 
             const data = await response.json();
 
-            return JSON.stringify(data);
+            if (!data.sys || !data.sys.sunrise || !data.sys.sunset)
+                {
+                throw new Error('Sunrise and sunset data not available.');
+                }
+
+            return data;
             }
 
         catch (error)
@@ -76,21 +81,35 @@ function convertStateToAbbreviation(state) {
         var queryString = getWeatherQueryString(inputString);
 
         fetchWeatherData(queryString)
-        .then((queryResults) =>
+        .then((data) =>
             {
             console.log(inputString);
             console.log(queryString);
-            console.log(queryResults);
+            console.log(data);
 
-            // Check if the element exists before manipulating it
-            if (tagPrompt && tagDataQuery && tagResult) {
-                // Replace the current contents with new content
-                tagPrompt.innerHTML = "Prompt: " + inputString;
+            const sunriseTime = new Date(data.sys.sunrise * 1000);
+            const sunsetTime = new Date(data.sys.sunset * 1000);
+            const weatherIcon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+            const weatherDescription = data.weather[0].description;
+            console.log(weatherDescription);
+
+         // Check if the element exists before manipulating it
+            if (tagPrompt && tagDataQuery && tagResult)
+                {
+             // Replace the current contents with new content
+                tagPrompt.innerHTML = "Prompt: " + (inputString ? inputString : "DEFAULT");
                 tagDataQuery.innerHTML = "Query: " + queryString;
-                tagResult.innerHTML = "Result: " + queryResults;
-            } else {
+                tagResult.innerHTML = "Result: " +
+                    '<ul>' +
+                    '<li> Sunrise: ' + sunriseTime.toLocaleTimeString() + '</li>' +
+                    '<li> Sunset: ' + sunsetTime.toLocaleTimeString() + '</li>' +
+                    '<li> Icon: ' + weatherDescription + '<br><img id="weatherIcon" src="'+ weatherIcon + '" alt="Weather Icon">' + '</li>' +
+                    '</ul>';
+                }
+            else
+                {
                 console.error("Spectacular fail! Game over!");
-            }
+                }
             })
         .catch((error) =>
             {
