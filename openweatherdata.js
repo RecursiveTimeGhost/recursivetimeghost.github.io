@@ -5,18 +5,17 @@ const regexState     = /^(?:[A-Za-z]{2}|Alabama|Alaska|Arizona|Arkansas|Californ
 const STATE_ABBREVIATIONS = {"Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR", "California": "CA", "Colorado": "CO", "Connecticut": "CT", "Delaware": "DE", "Florida": "FL", "Georgia": "GA", "Hawaii": "HI", "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Iowa": "IA", "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Maine": "ME", "Maryland": "MD", "Massachusetts": "MA", "Michigan": "MI", "Minnesota": "MN", "Mississippi": "MS", "Missouri": "MO", "Montana": "MT", "Nebraska": "NE", "Nevada": "NV", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY", "North Carolina": "NC", "North Dakota": "ND", "Ohio": "OH", "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT", "Vermont": "VT", "Virginia": "VA", "Washington": "WA", "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY"};
 
 const API_KEY = '5ba71ce449f4d7fe5a132fd6b5251ed1';
-const DEFAULTS = {zipcode: '02140', city:'Cambridge', state:'MA'};
+const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
 
-    function convertStateToAbbreviation(state)
-        {
-        return regexState.test(state) ? stateAbbreviations[state] || state : 'MA';
-        }
+function convertStateToAbbreviation(state) {
+    return regexState.test(state) ? STATE_ABBREVIATIONS[state] || state : 'MA';
+}
 
-    const fetchWeatherData = async () =>
+    const fetchWeatherData = async (OpenWeatherMapQueryString) =>
         {
         try
             {
-            const response = await fetch(queryByZip);
+            const response = await fetch(OpenWeatherMapQueryString);
 
             if (!response.ok) throw new Error('Weather data not found.');
 
@@ -66,24 +65,37 @@ const DEFAULTS = {zipcode: '02140', city:'Cambridge', state:'MA'};
         return query;
         }
 
- // assuming you have an element with the ID "yourElementId"
+
+function handleWeatherData() {
     var tagPrompt = document.getElementById("prompt");
     var tagDataQuery = document.getElementById("dataQuery");
     var tagResult = document.getElementById("result");
-    var inputString = '  New ^$#  Boston  , New   Hampshire    ';
 
-// check if the element exists before manipulating it
-    if (tagPrompt && tagDataQuery && tagResult)
-        {
-     // replace the current contents with new content
-        tagPrompt.innerHTML = "Prompt: " + inputString;
-        tagDataQuery.innerHTML = "Query: " + getWeatherQueryString(inputString);
-        tagResult.innerHTML = "Result: " + "<no data>";
-        }
-    else
-        {
-        console.error("Spectacular fail! Game over!");
-        }
+    var inputString = '';
+    var queryString = getWeatherQueryString(inputString);
+
+    fetchWeatherData(queryString)
+        .then((queryResults) => {
+            console.log(inputString);
+            console.log(queryString);
+            console.log(queryResults);
+
+            // Check if the element exists before manipulating it
+            if (tagPrompt && tagDataQuery && tagResult) {
+                // Replace the current contents with new content
+                tagPrompt.innerHTML = "Prompt: " + inputString;
+                tagDataQuery.innerHTML = "Query: " + queryString;
+                tagResult.innerHTML = "Result: " + queryResults;
+            } else {
+                console.error("Spectacular fail! Game over!");
+            }
+        })
+        .catch((error) => {
+            console.error("Error handling weather data:", error.message);
+        });
+}
+
+window.addEventListener('load', handleWeatherData);
 
 /**/
 // console.log("Query:  New ^$#  Boston  , New   Hampshire    | Result: ", getWeatherQueryString("  New ^$#  Boston  , New   Hampshire   "));
