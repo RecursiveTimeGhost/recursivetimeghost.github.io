@@ -111,9 +111,7 @@ const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
             const weatherIcon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
             const weatherDescription = data.weather[0].description;
 
-            console.log("data.dt: " + timestamp);
-            console.log("data.sys.sunrise: " + sunriseTime);
-            console.log("data.sys.sunset: " + sunsetTime);
+            console.log("tagWeatherData: " + tagWeatherData);
 
 //new Date().toLocaleString('en-US', {timeZone: 'America/New_York'})
 
