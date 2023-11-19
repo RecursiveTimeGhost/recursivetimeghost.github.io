@@ -104,16 +104,14 @@ const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
                 second: 'numeric'
                 });
 
+            const date_timezone = new Intl.DateTimeFormat(undefined, { timeZoneName: 'short' });
+
             const timestamp = new Date(data.dt * 1000);
             const sunriseTime = new Date(data.sys.sunrise * 1000);
             const sunsetTime = new Date(data.sys.sunset * 1000);
             const sunMode = detectSunMode (timestamp, sunriseTime, sunsetTime);
             const weatherIcon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
             const weatherDescription = data.weather[0].description;
-
-            console.log("tagWeatherData: " + tagWeatherData);
-
-//new Date().toLocaleString('en-US', {timeZone: 'America/New_York'})
 
          // Check if the element exists before manipulating it
             if (tagWeatherData)
@@ -132,7 +130,7 @@ const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
                     '<li>' + 'data.main.temp: ' + data.main.temp + '</li>' +
                     '<li>' + 'data.main.temp_max: ' + data.main.temp_max + '</li>' +
                     '<li>' + 'data.main.temp_min: ' + data.main.temp_min + '</li>' +
-                    '<li>' + 'meta.timeZone: ' + hhmmss_est.resolvedOptions().timeZone + '</li>' +
+                    '<li>' + 'meta.timeZone: ' + date_timezone.format(timestamp) + ' - ' + hhmmss_est.resolvedOptions().timeZone + '</li>' +
                     '<li>' + 'meta.sunMode: ' + sunMode + '</li>' +
                     '</ul>';
                 }
