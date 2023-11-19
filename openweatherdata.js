@@ -71,22 +71,12 @@ const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
         }
 
 
-    const isNightOrDay = (time, sunrise, sunset) =>
+    const detectSunMode = (time, sunrise, sunset) =>
         {
-      // Get the current hour and minute
-        const currentHour = time.getHours();
-        const currentMinute = time.getMinutes();
-
-     // Get sunrise and sunset hours (you need to set these values according to your location)
-        const sunriseHour = sunrise.getHours(); // Example sunrise hour
-        const sunriseMinute = sunrise.getMinutes(); // Example sunrise minute
-        const sunsetHour = sunset.getHours(); // Example sunset hour
-        const sunsetMinute = sunset.getMinutes(); // Example sunset minute
-
      // Convert sunrise and sunset times to minutes for easier comparison
-        const sunriseTime = sunriseHour * 60 + sunriseMinute;
-        const sunsetTime = sunsetHour * 60 + sunsetMinute;
-        const currentTime = currentHour * 60 + currentMinute;
+        const sunriseTime = sunrise.getHours() * 60 + sunrise.getMinutes();
+        const sunsetTime = sunset.getHours() * 60 + sunset.getMinutes();
+        const currentTime = time.getHours() * 60 + time.getMinutes();
 
      // Check if it's night or day
         return (currentTime >= sunsetTime || currentTime < sunriseTime) ? 'Night' : 'Day';
@@ -95,40 +85,57 @@ const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
 
     function handleWeatherData()
         {
-        var tagPrompt = document.getElementById("prompt");
-        var tagDataQuery = document.getElementById("dataQuery");
-        var tagResult = document.getElementById("result");
-
-        var inputString = '';
-        var queryString = getWeatherQueryString(inputString);
+        var tagWeatherData = document.getElementById("weatherData");
+        var queryString = getWeatherQueryString();
 
         fetchWeatherData(queryString)
         .then((data) =>
             {
-            console.log(inputString);
             console.log(queryString);
             console.log(data);
 
-            const now = new Date();
+            // Create an Intl.DateTimeFormat object with the specified time zone
+            const hhmmss_est = new Intl.DateTimeFormat('en-US',
+                {
+                timeZone: 'America/New_York',
+                hour12: false, // Use 24-hour format
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+                });
+
+            const timestamp = new Date(data.dt * 1000);
             const sunriseTime = new Date(data.sys.sunrise * 1000);
             const sunsetTime = new Date(data.sys.sunset * 1000);
-            const sunMode = isNightOrDay (now, sunriseTime, sunsetTime);
+            const sunMode = detectSunMode (timestamp, sunriseTime, sunsetTime);
             const weatherIcon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
             const weatherDescription = data.weather[0].description;
 
+            console.log("data.dt: " + timestamp);
+            console.log("data.sys.sunrise: " + sunriseTime);
+            console.log("data.sys.sunset: " + sunsetTime);
+
+//new Date().toLocaleString('en-US', {timeZone: 'America/New_York'})
+
          // Check if the element exists before manipulating it
-            if (tagPrompt && tagDataQuery && tagResult)
+            if (tagWeatherData)
                 {
-             // Replace the current contents with new content
-                tagPrompt.innerHTML = "Prompt: " + (inputString ? inputString : "DEFAULT");
-                tagDataQuery.innerHTML = "Query: " + queryString;
-                tagResult.innerHTML = "Result: " +
+                tagWeatherData.innerHTML =
                     '<ul>' +
-                    '<li>' + 'Time: ' + now.toLocaleTimeString() + '</li>' +
-                    '<li>' + 'Sunrise: ' + sunriseTime.toLocaleTimeString() + '</li>' +
-                    '<li>' + 'Sunset: ' + sunsetTime.toLocaleTimeString() + '</li>' +
-                    '<li>' + 'SunMode: ' + sunMode + '</li>' +
-                    '<li>' + 'Icon: ' + weatherDescription + '<br><img id="weatherIcon" src="'+ weatherIcon + '" alt="Weather Icon">' + '</li>' +
+                    '<li>' + 'user.query: ' + queryString + '</li>' +
+                    '<li>' + 'data.dt: ' + hhmmss_est.format(timestamp) + '</li>' +
+                    '<li>' + 'data.sys.sunrise: ' + hhmmss_est.format(sunriseTime) + '</li>' +
+                    '<li>' + 'data.sys.sunset: ' + hhmmss_est.format(sunsetTime) + '</li>' +
+                    '<li>' + 'data.weather[0].icon: ' + weatherIcon + '</li>' +
+                    '<li>' + 'data.weather[0].description: ' + weatherDescription + '</li>' +
+                    '<li>' + 'data.main.feels_like: ' + data.main.feels_like + '</li>' +
+                    '<li>' + 'data.main.humidity: ' + data.main.humidity + '</li>' +
+                    '<li>' + 'data.main.pressure: ' + data.main.pressure + '</li>' +
+                    '<li>' + 'data.main.temp: ' + data.main.temp + '</li>' +
+                    '<li>' + 'data.main.temp_max: ' + data.main.temp_max + '</li>' +
+                    '<li>' + 'data.main.temp_min: ' + data.main.temp_min + '</li>' +
+                    '<li>' + 'meta.timeZone: ' + hhmmss_est.resolvedOptions().timeZone + '</li>' +
+                    '<li>' + 'meta.sunMode: ' + sunMode + '</li>' +
                     '</ul>';
                 }
             else
@@ -146,13 +153,16 @@ const DEFAULTS = { zipcode: '02140', city: 'Cambridge', state: 'MA' };
     function handleOnLoadEvent()
         {
         handleWeatherData();
+        console.log ('timeZone: ' + new Intl.DateTimeFormat("en-US", ).resolvedOptions().timeZone);
         }
 
     // function handleRefreshEvent ()
     //     {
     //     }
 
-window.addEventListener('load', handleOnLoadEvent);
+    window.addEventListener('load', handleOnLoadEvent);
+
+  // Get the resolved options, which includes the timeZone property
 
 /**/
 // console.log("Query:  New ^$#  Boston  , New   Hampshire    | Result: ", getWeatherQueryString("  New ^$#  Boston  , New   Hampshire   "));

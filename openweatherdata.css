@@ -31,12 +31,7 @@ body
     }
 
 
-a,
-a:link,
-a:visited,
-a:active,
-a:hover
-
+a, a:link, a:visited, a:active, a:hover
     {
     color: #588157;
     text-decoration: none;
@@ -47,8 +42,7 @@ a:hover
     a:hover {border-bottom: 2px #000000 solid;}
 
 
-h1,
-p
+h1, p, ul
     {
     padding-bottom: 0.67rem
     }
@@ -63,10 +57,10 @@ p
 
     #menu li {list-style: none; display: inline-block;}
 
-#data
+#weatherData
     {
     display: block;
     }
 
-    #data li {margin-left: 2.0rem}
-    #data li img {vertical-align: top;}
+    #weatherData li {list-style: none; margin-left: 2.0rem; white-space: pre-wrap;}
+    #weatherData li img {vertical-align: top;}
