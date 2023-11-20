@@ -36,24 +36,24 @@ const OpenWeatherMapAPIQueryString = (request = "") =>
     return query;
     }
 
-
 const fetchOpenWeatherMapAPIData = async () =>
     {
     const apiQueryString = OpenWeatherMapAPIQueryString();
     const response = await fetch(apiQueryString);
 
-    if (!response.ok)
-        throw new Error('Weather data not found.');
+    if (!response.ok) throw new Error('Weather data not found.');
 
     const data = await response.json();
-
-    if (!data.sys.sunrise || !data.sys.sunset)
-        throw new Error('Data not available.');
 
     return data;
     };
 
 
+
+const toggleModeCSS = (event) =>
+    {
+    console.log(`Event = {type: ${event.type} , name: ${event.target}`);
+    }
 
 function handleOnLoadEvent()
     {
@@ -62,12 +62,29 @@ function handleOnLoadEvent()
         fetchOpenWeatherMapAPIData()
         .then((data) =>
             {
-            console.log(data);
+            console.log("weatherdata: " + data);
+
+            const metadata =
+                {
+                name: data.name,
+                sunrise: data.sys.sunrise,
+                sunset: data.sys.sunset,
+                description: data.weather[0].description
+                };
+
+            console.log("metadata: " + metadata);
             })
         .catch((error) =>
             {
-            console.error(`Error: ${error.message}`);
+            console.error("Error: " + error.message);
             });
+
+// document.getElementById('light2dark').addEventListener('click', toggleModeCSS);
+// document.getElementById('dark2light').addEventListener('click', toggleModeCSS);
+// document.getElementById('myList').addEventListener('click', function(event)
+//  {
+//  alert(`You clicked on ${event.target.tagName}: ${event.target.textContent}`);
+//  });
         }
     catch (error)
         {
@@ -75,7 +92,7 @@ function handleOnLoadEvent()
         }
     }
 
-    window.addEventListener('load', handleOnLoadEvent);
+window.addEventListener('load', handleOnLoadEvent);
 
 // PREVIOUS SNIPPETS THAT MIGHT BE REUSED OR REPURPOSED
 // const $$ =
