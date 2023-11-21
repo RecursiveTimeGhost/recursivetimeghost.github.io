@@ -8,8 +8,8 @@ const OpenWeatherMapAPIQueryString = (request = "") =>
     const isZipCodeRequest = (i) => {return regexZipCode.test(i) ? true : false;}
     const isCityStateRequest = (i) => {return regexCityState.test(i) ? true : false;}
     const convertStateToAbbreviation = (state) => {return regexState.test(state) ? STATE_ABBREVIATIONS[state] || state : 'MA';}
-    const queryByZipCode = (z) => {return `https://api.openweathermap.org/data/2.5/weather?zip=${z},us&appid=${APIKEY}&units=imperial&lang=en`;}
-    const queryByCityState = (c,s) => {return `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(c)},${encodeURIComponent(convertStateToAbbreviation(s))},us&appid=${APIKEY}&units=imperial&lang=en`;}
+    const queryByZipCode = (z) => {return `https://api.openweathermap.org/data/2.5/weather?zip=${z},us&appid=5ba71ce449f4d7fe5a132fd6b5251ed1&units=imperial&lang=en`;}
+    const queryByCityState = (c,s) => {return `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(c)},${encodeURIComponent(convertStateToAbbreviation(s))},us&appid=5ba71ce449f4d7fe5a132fd6b5251ed1&units=imperial&lang=en`;}
     const defaultQuery = queryByZipCode(cleanUpRequest('02140'));
     const info = cleanUpRequest(request);
 
@@ -28,10 +28,10 @@ const OpenWeatherMapAPIQueryString = (request = "") =>
 
         default:
             query = defaultQuery;
-            console.log(query);
             break;
         }
 
+    console.log("OpenWeatherMapAPIQueryString: " + query);
     return query;
     }
 
@@ -49,9 +49,9 @@ const fetchOpenWeatherMapAPIData = async () =>
 
 
 
-const toggleModeCSS = (event) =>
+const clickFeedback = (event) =>
     {
-    console.log(`Event = {type: ${event.type} , name: ${event.target}`);
+    console.log({type: event.type, content: event.target.textContent});
     }
 
 function handleOnLoadEvent()
@@ -61,33 +61,48 @@ function handleOnLoadEvent()
         fetchOpenWeatherMapAPIData()
         .then((data) =>
             {
-            console.log("weatherdata: " + data);
+            console.log(data);
 
             const metadata =
                 {
                 name: data.name,
+                timestamp: data.dt,
                 sunrise: data.sys.sunrise,
                 sunset: data.sys.sunset,
-                description: data.weather[0].description
+                id: data.weather[0].id,
+                main: data.weather[0].main,
+                description: data.weather[0].description,
+                icon: data.weather[0].icon,
                 };
 
-            console.log("metadata: " + metadata);
+            // Get the reference to the UL element
+            var list = document.getElementById('metadata');
+
+            if (!list) throw new Error("List element "+ list.id +" not found.");
+
+            for (var p in metadata)
+                {
+                if (metadata.hasOwnProperty(p))
+                    {
+                    var listItem = document.createElement("li");
+                    listItem.textContent = p + ": " + metadata[p];
+                    list.appendChild(listItem);
+                    }
+                }
+
+            console.log(metadata);
             })
         .catch((error) =>
             {
-            console.error("Error: " + error.message);
+            console.error("error.message: " + error.message);
             });
 
-// document.getElementById('light2dark').addEventListener('click', toggleModeCSS);
-// document.getElementById('dark2light').addEventListener('click', toggleModeCSS);
-// document.getElementById('myList').addEventListener('click', function(event)
-//  {
-//  alert(`You clicked on ${event.target.tagName}: ${event.target.textContent}`);
-//  });
+        document.getElementById('light2dark').addEventListener('click', clickFeedback);
+        document.getElementById('dark2light').addEventListener('click', clickFeedback);
         }
     catch (error)
         {
-        console.error("Error: " + error.message);
+        console.error("error.message: " + error.message);
         }
     }
 

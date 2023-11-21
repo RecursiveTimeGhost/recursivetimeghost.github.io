@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=PT+Sans:wght@400;700&display=swap');
 
+[hidden]
+    {
+    display: none;
+    }
 
 *
 
@@ -16,7 +20,9 @@ html
 
     {
     min-width: 320px;
-    width: 100%;
+    width: auto;
+    font-size: 18px;
+    line-height: 1.0rem;
     }
 
 
@@ -28,16 +34,12 @@ body
     height: auto;
     background: #DAD7CD;
     color: #588157;
-    font: normal 18px/1.4em 'Inconsolata', monospace;
+    font: normal 1.0rem/1.62rem 'Inconsolata', monospace;
     text-align: center;
     }
 
 
-a,
-a:link,
-a:visited,
-a:active,
-a:hover
+a, a:link, a:visited, a:active, a:hover
 
     {
     border-bottom: 2px #B4C29B solid;
@@ -48,6 +50,7 @@ a:hover
 
     a:hover {border-bottom: 2px #588157 solid; color: #344E41;}
 
+h2, p, ul {margin-bottom: 0.67rem}
 
 nav
 
@@ -93,11 +96,11 @@ footer
     footer div.label {text-align: right;}
     footer div.label:after {content:"\00BB";}
 
-    footer ul                      {display:block; padding-bottom:0.67em;}
-    footer ul li                   {list-style: none; display: inline-block;}
-    footer ul li:after             {content:"\0020\2022";}
-    footer ul li:first-child       {display: block;}
-    footer ul li:first-child:after {content:"\0020\203A";}
-    footer ul li:last-child:after  {content:"";}
-
+    footer ul {padding-bottom:0.67em; font-size:0.0rem; display: flex; flex-direction: row; flex-wrap: wrap;}
+    footer ul li {list-style: none; display:inline-block; font-size:1.0rem; width: max-content; white-space: normal}
+    footer ul li:nth-child(1) {list-style: none; display: block;width: calc(100%);}
+    footer ul li:before {content: '\00a0\2022\00a0';}
+    footer ul li:nth-child(1):after {content: '\203A';}
+    footer ul li:nth-child(1):before {content: '';}
+    footer ul li:nth-child(2):before {content: '';}
 
