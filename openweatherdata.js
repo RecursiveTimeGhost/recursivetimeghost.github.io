@@ -4,31 +4,25 @@ const OpenWeatherMapAPIQueryString = (request = "") =>
     const regexCityState = /^\s*([\w\s]+)\s*,\s*([\w\s]+)\s*$/i;
     const regexState = /^(?:[A-Za-z]{2}|Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|West Virginia|Wisconsin|Wyoming)$/i;
     const STATE_ABBREVIATIONS = {"Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR", "California": "CA", "Colorado": "CO", "Connecticut": "CT", "Delaware": "DE", "Florida": "FL", "Georgia": "GA", "Hawaii": "HI", "Idaho": "ID", "Illinois": "IL", "Indiana": "IN", "Iowa": "IA", "Kansas": "KS", "Kentucky": "KY", "Louisiana": "LA", "Maine": "ME", "Maryland": "MD", "Massachusetts": "MA", "Michigan": "MI", "Minnesota": "MN", "Mississippi": "MS", "Missouri": "MO", "Montana": "MT", "Nebraska": "NE", "Nevada": "NV", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY", "North Carolina": "NC", "North Dakota": "ND", "Ohio": "OH", "Oklahoma": "OK", "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT", "Vermont": "VT", "Virginia": "VA", "Washington": "WA", "West Virginia": "WV", "Wisconsin": "WI", "Wyoming": "WY"};
-    const cleanUpRequest = (i) => {return i.replace(/\s*,\s*/g, ",").replace(/([^\w\s,]*)/g, "").trim().replace(/(\s)+/g," ");}
+    const formatRequest = (i) => {return i.replace(/\s*,\s*/g, ",").replace(/([^\w\s,]*)/g, "").trim().replace(/(\s)+/g," ");}
     const isZipCodeRequest = (i) => {return regexZipCode.test(i) ? true : false;}
     const isCityStateRequest = (i) => {return regexCityState.test(i) ? true : false;}
-    const convertStateToAbbreviation = (state) => {return regexState.test(state) ? STATE_ABBREVIATIONS[state] || state : 'MA';}
-    const queryByZipCode = (z) => {return `https://api.openweathermap.org/data/2.5/weather?zip=${z},us&appid=5ba71ce449f4d7fe5a132fd6b5251ed1&units=imperial&lang=en`;}
-    const queryByCityState = (c,s) => {return `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(c)},${encodeURIComponent(convertStateToAbbreviation(s))},us&appid=5ba71ce449f4d7fe5a132fd6b5251ed1&units=imperial&lang=en`;}
-    const defaultQuery = queryByZipCode(cleanUpRequest('02140'));
-    const info = cleanUpRequest(request);
-
- // Build query string using utility functions (above)
-    let query = "";
+    const convertStateToAbbreviation = (ss) => {return regexState.test(ss) ? STATE_ABBREVIATIONS[ss] : ss;}
+    const queryByZipCode = (zzzzz) => {return `https://api.openweathermap.org/data/2.5/weather?zip=${zzzzz},us&appid=5ba71ce449f4d7fe5a132fd6b5251ed1&units=imperial&lang=en`;}
+    const queryByCityState = (cty,stt) => {return `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(sty)},${encodeURIComponent(convertStateToAbbreviation(stt))},us&appid=5ba71ce449f4d7fe5a132fd6b5251ed1&units=imperial&lang=en`;}
+    const info = formatRequest(request);
+    let query = null;
 
     switch (true)
         {
         case isZipCodeRequest(info):
-            query = queryByZipCode(info.match(regexZipCode)[0]);
-            break;
+            query = queryByZipCode(info.match(regexZipCode)[0]); break;
 
         case isCityStateRequest(info):
-            query = queryByCityState(info.match(regexCityState)[1],info.match(regexCityState)[2]);
-            break;
+            query = queryByCityState(info.match(regexCityState)[1],info.match(regexCityState)[2]); break;
 
         default:
-            query = defaultQuery;
-            break;
+            query = queryByZipCode(formatRequest('02140')); break;
         }
 
     console.log("OpenWeatherMapAPIQueryString: " + query);
