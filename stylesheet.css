@@ -48,19 +48,34 @@ a, a:link, a:visited, a:active, a:hover
 
     a:hover {border-bottom: 2px #588157 solid; color: #344E41;}
 
+<<<<<<< HEAD
 h1, h2, p, ul {margin-bottom: 0.67rem}
+=======
+h1, h2, p, ul
+
+    {
+    margin-bottom: 0.67rem;
+    }
+>>>>>>> 62982f4 (Updated markup, CSS; added blogs;)
 
 nav
 
     {
     display: block;
-    padding: 0.67em 1.62em;
+    padding: 0.67rem 1.62rem;
     color: #92A079;
     text-align: right;
     }
 
-    nav ul li {list-style: none; display: inline-block;}
+    nav ul li 
+        {
+        list-style: none; display: inline-block;
+        }
 
+    nav i
+        {
+        vertical-align:middle;
+        } 
 
 header
 
@@ -82,10 +97,19 @@ header
 article
 
     {
+<<<<<<< HEAD
     display: block;
     padding: 1.62rem;
     color: #588157;
     font: normal 1.0em/1.3rem 'PT Sans', sans-serif;
+=======
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-column-gap: 0.67rem;
+    grid-row-gap: 0.67rem;
+    padding: 1.62rem;
+    color: #588157;
+>>>>>>> 62982f4 (Updated markup, CSS; added blogs;)
     text-align: left;
     }
 
@@ -103,11 +127,17 @@ article
         line-height: 1.3em;
         }
 
+<<<<<<< HEAD
     article ul {margin-left: 1.62em;}
     article samp
 
         {
         margin-left: 1.62em;
+=======
+    article code
+
+        {
+>>>>>>> 62982f4 (Updated markup, CSS; added blogs;)
         font: normal 16px/1.3rem 'Inconsolata', monospace;
         white-space: pre-wrap;
         }
@@ -117,21 +147,21 @@ footer
     {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-column-gap: 0.67em;
-    grid-row-gap: 0.67em;
-    padding: 1.62em;
+    grid-column-gap: 0.67rem;
+    grid-row-gap: 0.67rem;
+    padding: 1.62rem;
+    background-color: #C9C6BC;
     color: #92A079;
     text-align: left;
     }
 
-    footer div.label {text-align: right;}
-    footer div.label:after {content:"\00BB";}
+div.label {text-align: right;}
+div.label:after {content:"\00a0\00BB";}
 
-    footer ul {padding-bottom:0.67em; font-size:0.0rem; display: flex; flex-direction: row; flex-wrap: wrap;}
-    footer ul li {list-style: none; display:inline-block; font-size:1.0rem; width: max-content; white-space: normal}
-    footer ul li:nth-child(1) {list-style: none; display: block;width: calc(100%);}
-    footer ul li:before {content: '\00a0\2022\00a0';}
-    footer ul li:nth-child(1):after {content: '\203A';}
-    footer ul li:nth-child(1):before {content: '';}
-    footer ul li:nth-child(2):before {content: '';}
-
+ul.linkList {display: block; font-size: 0.0rem; padding-bottom:0.67rem;}
+ul.linkList li {list-style: none; display:inline-block; font-size:1.0rem; width: max-content; white-space: normal}
+ul.linkList li:nth-child(1) {list-style: none; display: block; width: calc(100%);}
+ul.linkList li:before {content: '\00a0\2022\00a0';}
+ul.linkList li:nth-child(1):after {content: '\00a0\203A\00a0';}
+ul.linkList li:nth-child(1):before {content: '';}
+ul.linkList li:nth-child(2):before {content: '';}
