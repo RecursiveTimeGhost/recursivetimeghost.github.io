@@ -93,19 +93,12 @@ header
 article
 
     {
-<<<<<<< HEAD
-    display: block;
-    padding: 1.62rem;
-    color: #588157;
-    font: normal 1.0em/1.3rem 'PT Sans', sans-serif;
-=======
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-column-gap: 0.67rem;
     grid-row-gap: 0.67rem;
     padding: 1.62rem;
     color: #588157;
->>>>>>> 62982f4 (Updated markup, CSS; added blogs;)
     text-align: left;
     }
 
