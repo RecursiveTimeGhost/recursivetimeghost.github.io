@@ -48,15 +48,11 @@ a, a:link, a:visited, a:active, a:hover
 
     a:hover {border-bottom: 2px #588157 solid; color: #344E41;}
 
-<<<<<<< HEAD
-h1, h2, p, ul {margin-bottom: 0.67rem}
-=======
 h1, h2, p, ul
 
     {
     margin-bottom: 0.67rem;
     }
->>>>>>> 62982f4 (Updated markup, CSS; added blogs;)
 
 nav
 
@@ -127,17 +123,9 @@ article
         line-height: 1.3em;
         }
 
-<<<<<<< HEAD
-    article ul {margin-left: 1.62em;}
-    article samp
-
-        {
-        margin-left: 1.62em;
-=======
     article code
 
         {
->>>>>>> 62982f4 (Updated markup, CSS; added blogs;)
         font: normal 16px/1.3rem 'Inconsolata', monospace;
         white-space: pre-wrap;
         }
