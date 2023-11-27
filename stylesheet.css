@@ -48,7 +48,7 @@ a, a:link, a:visited, a:active, a:hover
 
     a:hover {border-bottom: 2px #588157 solid; color: #344E41;}
 
-h1, h2, p, ul
+h1, h2, h3, p, ul
 
     {
     margin-bottom: 0.67rem;
