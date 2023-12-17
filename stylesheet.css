@@ -63,7 +63,7 @@ nav
     text-align: left;
     }
 
-    nav ul li 
+    nav ul li
         {
         list-style: none; display: inline-block;
         }
@@ -71,7 +71,7 @@ nav
     nav i
         {
         vertical-align:middle;
-        } 
+        }
 
 header
 
@@ -121,6 +121,18 @@ article
         font: normal 16px/1.3rem 'Inconsolata', monospace;
         white-space: pre-wrap;
         }
+
+main
+
+    {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-column-gap: 0.67rem;
+    grid-row-gap: 0.67rem;
+    padding: 1.62rem;
+    color: #588157;
+    text-align: left;
+    }
 
 footer
 

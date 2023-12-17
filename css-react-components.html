@@ -8,20 +8,20 @@
 </head>
 <body>
 
-    <nav><a href="./index.html#"><i class="material-symbols-outlined">first_page</i></a><!--<a href="#"><i class="material-symbols-outlined">light_mode</i></a><a href="#"><i class="material-symbols-outlined">dark_mode</i></a>--></nav>
+<nav><a href="./index.html#"><i class="material-symbols-outlined">first_page</i></a><!--<a href="#"><i class="material-symbols-outlined">light_mode</i></a><a href="#"><i class="material-symbols-outlined">dark_mode</i></a>--></nav>
 
 <article>
 
     <div class="label"> blog </div>
 
     <div class="content">
-    
+
         <h2> What is the best way to structure CSS for components of a React app? </h2>
 
         <p>Structuring CSS for components in a React app can vary depending on personal preference, team conventions, and project requirements. However, there are some commonly used approaches that you can consider:</p>
 
         <h3> 1. CSS Modules </h3>
-        
+
         <ul> Pros
         <li>Local scoping: Styles are scoped to the component, reducing the chance of naming conflicts.</li>
         <li>Easy to use: Similar to regular CSS, but with the benefits of local scoping.</li>
@@ -30,7 +30,7 @@
         <ul> Cons
         <li>Learning curve for developers unfamiliar with the concept.</li>
         </ul>
-        
+
         <p> Example: <code>
 css
 /* styles.module.css */
@@ -49,10 +49,10 @@ const Button = () => {
     return <button className={styles.button}>Click me</button>;
 };
 </code></p>
-        
+
         <h3> 2. Styled Components: </h3>
 
-        <ul> Pros: 
+        <ul> Pros:
         <li>Components are styled using tagged template literals, making it easy to understand and use.</li>
         <li>Supports dynamic styling based on props.</li>
         </ul>
@@ -77,18 +77,18 @@ const Button = () => {
     return <StyledButton>Click me</StyledButton>;
 };
             </code></p>
-        
+
             <h3> 3. BEM (Block Element Modifier): </h3>
-        
+
             <ul> Pros:
             <li>Naming convention makes it easy to understand the relationship between styles and components.</li>
             <li>Helps avoid specificity issues.</li>
             </ul>
-            
+
             <ul> Cons:
             <li>Class names can become verbose.</li>
             </ul>
-            
+
             <p> Example: <code>
 css
 /* styles.css */
@@ -107,18 +107,18 @@ const Button = () => {
     return <button className="button">Click me</button>;
 };
             </code></p>
-            
+
             <h3> 4. Utility-First (e.g., Tailwind CSS): </h3>
-        
-            <ul> Pros: 
+
+            <ul> Pros:
             <li>Rapid development with pre-defined utility classes.</li>
             <li>Consistent styling across components.</li>
             </ul>
-            
+
             <ul> Cons:
             <li>Can lead to large file sizes if not tree-shaken.</li>
             </ul>
-            
+
             <p> Example: <code>
 jsx
 // Button.js
@@ -128,21 +128,21 @@ const Button = () => {
     return <button className="bg-blue-500 text-white px-4 py-2">Click me</button>;
 };
         </code></p>
-        
+
         <h3> 5. CSS-in-JS Libraries (e.g., Emotion, Styled-components): </h3>
-    
+
         <ul> Pros:
         <li>Styles are scoped to the component.</li>
         <li>Supports dynamic styling based on props.</li>
         </ul>
-        
+
         <ul> Cons
         <li>Learning curve for developers unfamiliar with the concept.</li>
         </ul>
-        
+
         <p>Example (Emotion): <code>
 jsx
-// @jsxImportSource @emotion/react 
+// @jsxImportSource @emotion/react
 import { css } from '@emotion/react';
 import React from 'react';
 
@@ -156,12 +156,12 @@ const Button = () => {
     return <button css={buttonStyle}>Click me</button>;
 };
         </code></p>
-    
+
         <p> Choose the approach that best fits your team's preferences, the scale of your project, and the level of isolation you want for your component styles. It's also common to see a combination of these approaches within a single project. </p>
-    
+
         </div>
-    
+
     </article>
-    
+
 </body>
 </html>
