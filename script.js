@@ -17,7 +17,7 @@ const DESCRIPTION = 'A tiny blog for nerds.';
          });
       }
 
-const exportFooterLinksAsJSON ()
+const exportFooterLinksAsJSON = () =>
   {
   let footerLinks = {};
 
