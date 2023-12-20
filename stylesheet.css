@@ -1,159 +1,170 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;800&family=PT+Sans:wght@400;700&display=swap');
 
+
 [hidden]
-    {
-    display: none;
-    }
+  {
+  display: none;
+  }
+
 
 *
-
-    {
-    border: 0;
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    }
+  {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  }
 
 
 html
-
-    {
-    min-width: 320px;
-    width: auto;
-    font: normal 16px/1.3em 'PT Sans', sans-serif;
-    }
+  {
+  min-width: 320px;
+  width: auto;
+  font: normal 16px/1.3em 'PT Sans', sans-serif;
+  }
 
 
 body
-
-    {
-    display: block;
-    width: auto;
-    height: auto;
-    background: #DAD7CD;
-    color: #588157;
-    text-align: center;
-    }
+  {
+  display: block;
+  width: auto;
+  height: auto;
+  background-color: #B8b5ab;
+  color: #667056;
+  text-align: left;
+  }
 
 
 a, a:link, a:visited, a:active, a:hover
-
     {
-    border-bottom: 2px #B4C29B solid;
+    border-bottom: 2px #588157 solid;
     color: #588157;
     text-decoration: none;
     text-transform: lowercase;
     }
 
-    a:hover {border-bottom: 2px #588157 solid; color: #344E41;}
+    a:hover {border-bottom: 2px #344E41 solid; color: #344E41;}
 
-h1, h2, h3, p, ul
-
-    {
-    margin-bottom: 0.67rem;
-    }
+p, ul, h3, h4
+  {
+  padding-bottom: 0.67rem;
+  }
 
 nav
-
-    {
-    display: block;
-    padding: 0.67rem 1.62rem;
-    color: #92A079;
-    text-align: left;
-    }
-
-    nav ul li
-        {
-        list-style: none; display: inline-block;
-        }
-
-    nav i
-        {
-        vertical-align:middle;
-        }
+  {
+  display: block;
+  background-color: #C9C6BC;
+  }
 
 header
+  {
+  display: block;
+  background-color: #344E41;
+  }
 
+  header h1
     {
     display: block;
     padding: 1.62em;
-    background: #344E41;
+    color: #A3B18A;
+    font-size: 1.7rem;
+    font-weight: normal;
+    line-height: 1.3em;
+    text-align: center;
     }
 
-    header h1
 
-        {
-        display: block;
-        color: #A3B18A;
-        font: normal 2.4em/1.3em 'PT Sans', sans-serif;
-        text-align: center;
-        }
-
-article
+article, main, footer
     {
     display: grid;
     grid-template-columns: 1fr 4fr;
     grid-column-gap: 0.67rem;
     grid-row-gap: 0.67rem;
-    padding: 1.62rem;
-    color: #588157;
-    text-align: left;
+    padding: 1.5rem 0.0rem;
+    background-color: none;
     }
 
-    article h2
+main {background-color: #C9C6BC;}
 
-        {
-        font-size: 1.62rem;
-        line-height: 1.3em;
-        }
 
-    article h3
-
-        {
-        font-size: 1.0rem;
-        line-height: 1.3em;
-        }
-
-    article code
-
-        {
-        font: normal 16px/1.3rem 'Inconsolata', monospace;
-        white-space: pre-wrap;
-        }
-
-main
-
+article h3
     {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-column-gap: 0.67rem;
-    grid-row-gap: 0.67rem;
-    padding: 1.62rem;
-    color: #588157;
-    text-align: left;
+    font-size: 1.62rem;
+    line-height: 1.3em;
     }
 
-footer
-
+article h4
     {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    grid-column-gap: 0.67rem;
-    grid-row-gap: 0.67rem;
-    padding: 1.62rem;
-    background-color: #C9C6BC;
-    color: #92A079;
-    text-align: left;
+    font-size: 1.0rem;
+    line-height: 1.3em;
     }
 
-div.label {text-align: right;}
-div.label:after {content:"\00a0\00BB";}
+article code
+    {
+    font-size: 1.0rem;
+    font-family: 'Inconsolata', monospace;
+    white-space: pre-wrap;
+    }
 
-ul.linkList {display: block; font-size: 0.0rem; padding-bottom:0.67rem;}
-ul.linkList li {list-style: none; display:inline-block; font-size:1.0rem; width: max-content; white-space: normal}
-ul.linkList li:nth-child(1) {list-style: none; display: block; width: calc(100%);}
-ul.linkList li:before {content: '\00a0\2022\00a0';}
-ul.linkList li:nth-child(1):after {content: '\00a0\203A\00a0';}
-ul.linkList li:nth-child(1):before {content: '';}
-ul.linkList li:nth-child(2):before {content: '';}
+
+main h2,
+article h2,
+footer h2
+  {
+  font-size: 1.0rem;
+  line-height: 1.3em;
+  text-align: right;
+  }
+
+main h2:after,
+article h2:after,
+footer h2:after
+  {
+  content: "\00a0\00BB";
+  }
+
+main ul,
+footer ul
+  {
+  display: block;
+  font-size: 0.0rem;
+  }
+
+main ul li,
+footer ul li
+  {
+  list-style: none;
+  display: inline-block;
+  font-size: 1.0rem;
+  width: max-content;
+  white-space: normal;
+  }
+
+main ul li:before,
+footer ul li:before
+  {
+  content: '\00a0\2022\00a0';
+  }
+
+main ul li:nth-child(1),
+footer ul li:nth-child(1)
+  {
+  display: block;
+  width: calc(100%);
+  }
+
+main ul li:nth-child(1):before,
+footer ul li:nth-child(1):before,
+main ul li:nth-child(2):before,
+footer ul li:nth-child(2):before
+  {
+  content: '';
+  }
+
+main ul li:nth-child(1):after,
+footer ul li:nth-child(1):after
+  {
+  content: '\00a0\203A\00a0';
+  }
+

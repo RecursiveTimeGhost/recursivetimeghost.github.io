@@ -1,63 +1,114 @@
-const TITLE       = 'Recursive Time Ghost';
-const DESCRIPTION = 'A tiny blog for nerds.';
-
-// Function to set the target attribute of all links to "_blank"
-   const setLinksTargetBlank = () =>
-      {
-      // Assuming your footer has an ID, replace "yourFooterId" with the actual ID
-      var footer = document.getElementsByTagName("footer");
-
-      Array.from(footer).forEach((f) =>
-         {
-      // Select all anchor elements within the footer
-         var links = f.getElementsByTagName('a');
-
-      // If you want to do something specific with each link, you can iterate through them
-         Array.from(links).forEach((l) => {console.log(l.href);});
-         });
-      }
-
-const exportFooterLinksAsJSON = () =>
+const DOM =
   {
-  let footerLinks = {};
-
-  // Iterate through each link list in the footer
-  document.querySelectorAll('footer .linkList').forEach((linkList, index) => {
-    // Check if there is a previous element sibling before accessing its textContent
-    const label = linkList.previousElementSibling ? linkList.previousElementSibling.textContent.trim().toLowerCase().replace(/\s/g, '_') : null;
-
-    if (label) {
-      // Use an existing category array or create a new one
-      footerLinks[label] = footerLinks[label] || [];
-
-      // Iterate through links in the current link list
-      linkList.querySelectorAll('li a').forEach(link => {
-        const linkInfo = {
-          text: link.textContent.trim(),
-          url: link.href.trim(),
-        };
-        footerLinks[label].push(linkInfo);
-      });
-    }
-  });
-
-  // Output the result to the console
-  console.log(JSON.stringify(footerLinks, null, 2));
+  tags: (t) => document.getElementsByTagName(t),
+  id: (i) => document.getElementById(i),
+  class: (c) => document.getElementsByClassName(c),
+  select: (s) => document.querySelector(s),
+  collect: (s) => document.querySelectorAll(s),
+  ready: (f) => document.addEventListener("DOMContentLoaded", f),
+  element: (s) => document.createElement(s),
   }
 
-// Function to set the target attribute of all links to "_blank"
-const handleWindowLoadEvent = () =>
+const isValidURL = (url) =>
   {
   try
     {
-    setLinksTargetBlank ();
+    new URL(url);
+    return true;
     }
   catch (error)
     {
-    console.error(error.message);
+    return false;
     }
   }
 
-// Call the function when the page has fully loaded
-    window.addEventListener('load', handleWindowLoadEvent);
+const fetchData = async (url) =>
+  {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Failed to fetch JSON from ${url}. HTTP error! Status: ${response.status}`);
+  return await response.json();
+  };
 
+const getDataJSON = async (url = null) =>
+  {
+  if (url)
+    {
+    try
+      {
+      const data = await fetchData(url);
+      return data;
+      }
+    catch (error)
+      {
+      console.error(`Error fetching JSON from ${url}:`, error);
+      return null;
+      }
+    }
+  else
+    {
+    console.error('Invalid URL. Aborting fetch request.');
+    return null;
+    }
+  };
+
+function generateLinkListFromJSON ({section = null, data = {}, target = '_self'})
+  {
+  if (section == null && Object.keys(data).length === 0) {console.error("Must specify an HTML tag and must provide a data source."); return;}
+
+  const sectionTags = DOM.tags(section);
+
+  Object.keys(data).forEach(category =>
+    {
+    const categoryTitle = DOM.element('h2');
+    const categoryLists = DOM.element('div');
+
+    categoryTitle.textContent = category;
+
+    Object.keys(data[category]).forEach(subcategory =>
+      {
+      const subCategoryList = DOM.element('ul');
+      const subCategoryListTitle = DOM.element('li');
+
+      subCategoryListTitle.textContent = subcategory;
+      subCategoryList.append(subCategoryListTitle);
+
+      Object.values(data[category][subcategory]).forEach(listData =>
+        {
+        const listTag = DOM.element('li');
+        const linkTag = DOM.element('a');
+
+        linkTag.href = listData.link;
+        linkTag.textContent = listData.title ? listData.title : listData.link;
+        linkTag.target = target;
+
+        listTag.append(linkTag);
+        subCategoryList.append(listTag);
+        });
+
+      categoryLists.append(subCategoryList);
+      });
+
+    sectionTags[0].append(categoryTitle, categoryLists);
+    });
+  }
+
+const handleReadyState = async () =>
+  {
+  const url = {articles: 'index.articles.json', bookmarks: 'index.bookmarks.json'};
+  const jsonDataMain = await getDataJSON(url.articles);
+  const jsonDataFooter = await getDataJSON(url.bookmarks);
+
+  if (jsonDataMain !== null)
+    {
+    console.log('JSON Data:', jsonDataMain);
+    generateLinkListFromJSON({section: 'main', data: jsonDataMain});
+    }
+
+  if (jsonDataFooter !== null)
+    {
+    console.log('JSON Data:', jsonDataFooter);
+    generateLinkListFromJSON({section: 'footer', data: jsonDataFooter, target: '_blank'});
+    }
+  };
+
+DOM.ready(handleReadyState);
