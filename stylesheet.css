@@ -60,18 +60,18 @@ nav
 header
   {
   display: block;
+  padding: 1.62em 0.0em;
   background-color: #344E41;
+  color: #A3B18A;
+  text-align: center;
   }
 
   header h1
     {
     display: block;
-    padding: 1.62em;
-    color: #A3B18A;
     font-size: 1.7rem;
     font-weight: normal;
     line-height: 1.3em;
-    text-align: center;
     }
 
 

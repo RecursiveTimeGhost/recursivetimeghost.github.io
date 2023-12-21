@@ -6,5 +6,12 @@
     {"title": "Recursive Time Ghost" , "link":"./blogs/recursive-time-ghost.html"},
     {"title": "CSS React Components" , "link":"./blogs/css-react-components.html"}
     ]
+  },
+"labs":
+  {
+  "javascript":
+    [
+    {"title": "Weather-Based CSS Theme" , "link":"./weatherThemeCSS/"}
+    ]
   }
 }
