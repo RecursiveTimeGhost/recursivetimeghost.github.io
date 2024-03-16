@@ -1,6 +1,6 @@
 const handleReadyState = async () =>
   {
-  const data = Data.get('index.bookmarks.json');
+  const data = Request.get('index.bookmarks.json');
   $$.trace(data);
   };
 
