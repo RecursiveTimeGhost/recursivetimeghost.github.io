@@ -47,4 +47,4 @@ function line(pos, state, dispatch)
   }
 
 let dom = startPixelEditor({tools: {draw, line, fill, rectangle, pick}});
-document.querySelector("div").appendChild(dom);
+document.getElementById("PixelEditor").appendChild(dom);
