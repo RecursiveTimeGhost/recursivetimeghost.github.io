@@ -307,16 +307,14 @@ function pictureFromImage(image)
   cx.drawImage(image, 0, 0);
   let pixels = [];
   let {data} = cx.getImageData(0, 0, width, height);
+  const hex = (n) => n.toString(16).padStart(2, "0");
 
-  function hex(n)
-    {
-    return n.toString(16).padStart(2, "0");
-    }
   for (let i = 0; i < data.length; i += 4)
     {
     let [r, g, b] = data.slice(i, i + 3);
     pixels.push("#" + hex(r) + hex(g) + hex(b));
     }
+
   return new Picture(width, height, pixels);
   }
 
